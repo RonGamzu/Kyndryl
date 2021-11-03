@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_mongoengine import MongoEngine
 from flask_cors import CORS
+import requests
 
 
 app = Flask(__name__)
@@ -20,7 +21,7 @@ class Users(db.Document):
     id = db.SequenceField(primary_key=True)
     first_name = db.StringField(required=True, min_length=2, max_length=30)
     last_name = db.StringField(required=True, min_length=2, max_length=30)
-    id_number = db.IntField(required=True,min_value=1000, unique=True)
+    id_number = db.IntField(required=True, min_value=1000, unique=True)
 
 
 @app.route('/addUser', methods=["POST"])
@@ -46,7 +47,8 @@ def getAllUsers():
     except:
         return 'Something got wrong', 404
 
-
-########################
+##################################
 if __name__ == "__main__":
     app.run(port=80, debug=False)
+
+
